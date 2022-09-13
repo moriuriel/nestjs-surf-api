@@ -5,11 +5,4 @@ export class Beach {
     readonly lat: number,
     readonly lng: number,
   ) {}
-
-  getPosition() {
-    return {
-      lat: this.lat,
-      lng: this.lng,
-    };
-  }
 }
