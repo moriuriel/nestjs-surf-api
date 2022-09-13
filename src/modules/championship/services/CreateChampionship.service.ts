@@ -1,18 +1,26 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IBeachRepository } from 'src/modules/beach/domain/repositories/IBeachRepository';
-import { BeachDataBaseRepository } from 'src/modules/beach/infra/repositories/BeachDatabase.repository';
+import { Championship } from '../domain/entities/Championship';
+import { IChampionshipRepository } from '../domain/repositories/IChampionshipRepository';
+import { ICreateChampionshioServiceParams } from '../domain/services/ICreateChampionshipService';
+import { ChampionshipDatabaseRepository } from '../infra/repositories/ChampionshipDatabase.repository';
 
 @Injectable()
 export class CreateChampionshipService {
   constructor(
-    @Inject(BeachDataBaseRepository)
-    private beachRepository: IBeachRepository,
+    @Inject(ChampionshipDatabaseRepository)
+    private championshipRepository: IChampionshipRepository,
   ) {}
-  async execute({ lat, lng, name, position }: ICreateBeachServiceParams) {
-    const beach = new Beach(name, position, lat, lng);
+  async execute({
+    name,
+    event_date,
+    beach_id,
+  }: ICreateChampionshioServiceParams) {
+    const championship = new Championship(name, event_date, beach_id);
 
-    const beachCreated = this.beachRepository.create(beach);
+    const championshipCreated = await this.championshipRepository.create(
+      championship,
+    );
 
-    return beachCreated;
+    return championshipCreated;
   }
 }

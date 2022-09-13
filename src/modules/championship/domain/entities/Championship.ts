@@ -6,7 +6,7 @@ export enum ChampionshipStatusEnum {
 export class Championship {
   constructor(
     public name: string,
-    public event_date: string,
+    public event_date: Date,
     public beach_id: string,
     public status?: ChampionshipStatusEnum,
   ) {
