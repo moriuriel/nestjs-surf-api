@@ -1,13 +1,29 @@
 import { Response as ExpressResponse } from 'express';
-import { Body, Controller, HttpStatus, Post, Response } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Post,
+  Response,
+} from '@nestjs/common';
 import { CreateChampionshipDto } from '../../dtos/CreateChampionship.dto';
 import { CreateChampionshipService } from '../../services/CreateChampionship.service';
+import { FindAllChampionshipsService } from '../../services';
 
 @Controller('/championships')
 export class ChampionshipController {
   constructor(
     private readonly createChampionshipService: CreateChampionshipService,
+    private readonly findAllChampionshipsService: FindAllChampionshipsService,
   ) {}
+
+  @Get()
+  async index(@Response() response: ExpressResponse): Promise<ExpressResponse> {
+    const championships = await this.findAllChampionshipsService.execute();
+
+    return response.status(HttpStatus.OK).json(championships);
+  }
 
   @Post()
   async create(

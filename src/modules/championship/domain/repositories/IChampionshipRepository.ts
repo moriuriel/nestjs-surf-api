@@ -1,3 +1,4 @@
+import { IBeach } from 'src/modules/beach/domain/repositories/IBeachRepository';
 import { Championship } from '../entities/Championship';
 
 export interface IChampionship {
@@ -7,7 +8,10 @@ export interface IChampionship {
   beach_id: string;
   status: string;
   createdAt: Date;
+  beach?: IBeach;
 }
+
 export interface IChampionshipRepository {
   create(championship: Championship): Promise<IChampionship>;
+  findAllChampionships(): Promise<IChampionship[]>;
 }

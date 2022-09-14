@@ -19,4 +19,10 @@ export class ChampionshipDatabaseRepository implements IChampionshipRepository {
       data: { beach_id, name, status, event_date },
     });
   }
+
+  async findAllChampionships(): Promise<IChampionship[]> {
+    return this.prismaService.championship.findMany({
+      include: { beach: true },
+    });
+  }
 }
