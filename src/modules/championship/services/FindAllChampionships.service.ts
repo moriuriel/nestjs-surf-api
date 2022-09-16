@@ -1,4 +1,5 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { SuccessReponseBuilder } from 'src/infra/response/Success.response';
 import {
   IChampionship,
   IChampionshipRepository,
@@ -12,7 +13,15 @@ export class FindAllChampionshipsService {
     private championshipRepository: IChampionshipRepository,
   ) {}
 
-  async execute(): Promise<IChampionship[]> {
-    return this.championshipRepository.findAllChampionships();
+  async execute() {
+    const championships =
+      await this.championshipRepository.findAllChampionships();
+
+    const response = new SuccessReponseBuilder<IChampionship[]>()
+      .setData(championships)
+      .setStatusCode(HttpStatus.OK)
+      .build();
+
+    return response;
   }
 }

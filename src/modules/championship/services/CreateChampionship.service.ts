@@ -1,10 +1,15 @@
 import {
+  HttpStatus,
   Inject,
   Injectable,
   UnprocessableEntityException,
 } from '@nestjs/common';
+import { SuccessReponseBuilder } from 'src/infra/response/Success.response';
 import { Championship } from '../domain/entities/Championship';
-import { IChampionshipRepository } from '../domain/repositories/IChampionshipRepository';
+import {
+  IChampionship,
+  IChampionshipRepository,
+} from '../domain/repositories/IChampionshipRepository';
 import { ICreateChampionshioServiceParams } from '../domain/services/ICreateChampionshipService';
 import { ChampionshipDatabaseRepository } from '../infra/repositories/ChampionshipDatabase.repository';
 
@@ -35,6 +40,11 @@ export class CreateChampionshipService {
       championship,
     );
 
-    return championshipCreated;
+    const response = new SuccessReponseBuilder<IChampionship>()
+      .setData(championshipCreated)
+      .setStatusCode(HttpStatus.CREATED)
+      .build();
+
+    return response;
   }
 }

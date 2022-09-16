@@ -38,6 +38,6 @@ export class BeachController {
   async index(@Response() response: ExpressResponse): Promise<ExpressResponse> {
     const beachs = await this.findAllBeachService.execute();
 
-    return response.status(HttpStatus.OK).json({ beachs });
+    return response.status(HttpStatus.OK).json(beachs);
   }
 }

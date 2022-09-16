@@ -1,4 +1,5 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { SuccessReponseBuilder } from 'src/infra/response/Success.response';
 import {
   IBeach,
   IBeachRepository,
@@ -11,9 +12,14 @@ export class FindAllBeachService {
     @Inject(BeachDataBaseRepository)
     private beachRepository: IBeachRepository,
   ) {}
-  async execute(): Promise<IBeach[]> {
-    const beachs = this.beachRepository.findAll();
+  async execute() {
+    const beachs = await this.beachRepository.findAll();
 
-    return beachs;
+    const response = new SuccessReponseBuilder<IBeach[]>()
+      .setData(beachs)
+      .setStatusCode(HttpStatus.OK)
+      .build();
+
+    return response;
   }
 }
