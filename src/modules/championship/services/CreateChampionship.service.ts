@@ -21,7 +21,7 @@ export class CreateChampionshipService {
   }: ICreateChampionshioServiceParams) {
     const championship = new Championship(name, event_date, beach_id);
 
-    const nameIsAlreadyInUse = this.championshipRepository.findByName(
+    const nameIsAlreadyInUse = await this.championshipRepository.findByName(
       championship.name,
     );
 
