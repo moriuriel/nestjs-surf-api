@@ -14,4 +14,5 @@ export interface IChampionship {
 export interface IChampionshipRepository {
   create(championship: Championship): Promise<IChampionship>;
   findAllChampionships(): Promise<IChampionship[]>;
+  findByName(name: string): Promise<IChampionship>;
 }

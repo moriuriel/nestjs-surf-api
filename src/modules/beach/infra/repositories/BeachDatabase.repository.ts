@@ -24,4 +24,8 @@ export class BeachDataBaseRepository implements IBeachRepository {
   async findAll(): Promise<IBeach[]> {
     return this.prismaService.beach.findMany();
   }
+
+  async findByName(name: string): Promise<IBeach> {
+    return this.prismaService.beach.findUnique({ where: { name } });
+  }
 }

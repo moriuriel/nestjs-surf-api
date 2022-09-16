@@ -25,4 +25,8 @@ export class ChampionshipDatabaseRepository implements IChampionshipRepository {
       include: { beach: true },
     });
   }
+
+  async findByName(name: string): Promise<IChampionship> {
+    return this.prismaService.championship.findUnique({ where: { name } });
+  }
 }
