@@ -1,4 +1,4 @@
-import { Success } from './Success';
+import { SuccessResponse } from './SuccessResponse';
 
 export class SuccessReponseBuilder<DataType> {
   private data: DataType;
@@ -33,6 +33,6 @@ export class SuccessReponseBuilder<DataType> {
   }
 
   build() {
-    return new Success<DataType>(this);
+    return new SuccessResponse<DataType>(this);
   }
 }

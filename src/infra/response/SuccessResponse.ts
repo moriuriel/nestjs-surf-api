@@ -1,6 +1,6 @@
-import { SuccessReponseBuilder } from './Success.response';
+import { SuccessReponseBuilder } from './SuccessResponse.builder';
 
-export class Success<DataType> {
+export class SuccessResponse<DataType> {
   data: DataType;
   timestamp: string;
   statusCode: number;

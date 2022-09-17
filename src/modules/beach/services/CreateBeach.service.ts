@@ -4,7 +4,7 @@ import {
   Injectable,
   UnprocessableEntityException,
 } from '@nestjs/common';
-import { SuccessReponseBuilder } from 'src/infra/response/Success.response';
+import { SuccessReponseBuilder } from 'src/infra/response';
 import { Beach } from '../domain/entities/Beach';
 import {
   IBeach,
