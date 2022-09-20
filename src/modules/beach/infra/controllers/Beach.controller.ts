@@ -4,17 +4,23 @@ import {
   Controller,
   Get,
   HttpStatus,
+  Param,
   Post,
   Response,
 } from '@nestjs/common';
 import { CreateBeachDto } from '../../dtos/CreateBeach.dto';
-import { FindAllBeachService, CreateBeachService } from '../../services';
+import {
+  FindAllBeachService,
+  CreateBeachService,
+  FindOneBeachService,
+} from '../../services';
 
 @Controller('/beachs')
 export class BeachController {
   constructor(
     private readonly createBeachService: CreateBeachService,
     private readonly findAllBeachService: FindAllBeachService,
+    private readonly findOneBeachService: FindOneBeachService,
   ) {}
 
   @Post()
@@ -37,6 +43,16 @@ export class BeachController {
   @Get()
   async index(@Response() response: ExpressResponse): Promise<ExpressResponse> {
     const beachs = await this.findAllBeachService.execute();
+
+    return response.status(HttpStatus.OK).json(beachs);
+  }
+
+  @Get(':beachId')
+  async find(
+    @Param('beachId') beachId: string,
+    @Response() response: ExpressResponse,
+  ): Promise<ExpressResponse> {
+    const beachs = await this.findOneBeachService.execute(beachId);
 
     return response.status(HttpStatus.OK).json(beachs);
   }

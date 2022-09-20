@@ -12,4 +12,5 @@ export interface IBeachRepository {
   create(beach: Beach): Promise<IBeach>;
   findAll(): Promise<IBeach[]>;
   findByName(name: string): Promise<IBeach>;
+  findById(id: string): Promise<IBeach>;
 }
