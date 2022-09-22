@@ -4,14 +4,14 @@ import {
   Injectable,
   UnprocessableEntityException,
 } from '@nestjs/common';
-import { SuccessReponseBuilder } from 'src/infra/response';
-import { Beach } from '../domain/entities/Beach';
+import { SuccessReponseBuilder } from '@/infra/response';
+import { Beach } from '@/modules/beach/domain/entities/Beach';
 import {
   IBeach,
   IBeachRepository,
-} from '../domain/repositories/IBeachRepository';
-import { ICreateBeachServiceParams } from '../domain/services/ICreateBeachService';
-import { BeachDataBaseRepository } from '../infra/repositories/BeachDatabase.repository';
+} from '@/modules/beach/domain/repositories/IBeachRepository';
+import { ICreateBeachServiceParams } from '@/modules/beach/domain/services/ICreateBeachService';
+import { BeachDataBaseRepository } from '@/modules/beach/infra/repositories/BeachDatabase.repository';
 
 @Injectable()
 export class CreateBeachService {

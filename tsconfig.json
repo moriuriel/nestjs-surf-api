@@ -20,7 +20,8 @@
     "noFallthroughCasesInSwitch": false,
     "rootDirs": ["src", "test", "db/migrations"],
     "paths": {
-      "@/*": ["*"],
+      "@/infra/*": ["./src/infra/*"],
+      "@/modules/*": ["./src/modules/*"],
       "@/test/*": ["../test/*"]
     }
   }
