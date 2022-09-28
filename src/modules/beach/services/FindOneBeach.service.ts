@@ -16,7 +16,7 @@ export class FindOneBeachService {
   async execute(id: string) {
     const beach = await this.beachRepository.findById(id);
 
-    const response = new SuccessReponseBuilder<IBeach>()
+    const response = new SuccessReponseBuilder<IBeach, null>()
       .setData(beach)
       .setStatusCode(HttpStatus.OK);
 

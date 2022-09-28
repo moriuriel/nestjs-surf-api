@@ -40,7 +40,7 @@ export class CreateChampionshipService {
       championship,
     );
 
-    const response = new SuccessReponseBuilder<IChampionship>()
+    const response = new SuccessReponseBuilder<IChampionship, null>()
       .setData(championshipCreated)
       .setStatusCode(HttpStatus.CREATED)
       .build();

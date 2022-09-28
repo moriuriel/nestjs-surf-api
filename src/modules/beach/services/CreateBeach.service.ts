@@ -32,7 +32,7 @@ export class CreateBeachService {
 
     const beachCreated = await this.beachRepository.create(beach);
 
-    const response = new SuccessReponseBuilder<IBeach>()
+    const response = new SuccessReponseBuilder<IBeach, null>()
       .setData(beachCreated)
       .setStatusCode(HttpStatus.CREATED)
       .build();

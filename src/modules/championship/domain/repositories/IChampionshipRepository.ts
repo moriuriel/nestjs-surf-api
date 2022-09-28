@@ -1,5 +1,6 @@
 import { IBeach } from 'src/modules/beach/domain/repositories/IBeachRepository';
 import { Championship } from '../entities/Championship';
+import { IPagination } from '@/common/decorators/getPagination';
 
 export interface IChampionship {
   id: string;
@@ -11,8 +12,13 @@ export interface IChampionship {
   beach?: IBeach;
 }
 
+export interface IFindAllChampionships {
+  championships: IChampionship[];
+  total: number;
+}
+
 export interface IChampionshipRepository {
   create(championship: Championship): Promise<IChampionship>;
-  findAllChampionships(): Promise<IChampionship[]>;
+  findAllChampionships(pagination: IPagination): Promise<IFindAllChampionships>;
   findByName(name: string): Promise<IChampionship>;
 }

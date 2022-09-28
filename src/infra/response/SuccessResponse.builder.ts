@@ -1,9 +1,10 @@
 import { SuccessResponse } from './SuccessResponse';
 
-export class SuccessReponseBuilder<DataType> {
+export class SuccessReponseBuilder<DataType, MetaDataType> {
   private data: DataType;
   private timestamp: string;
   private statusCode: number;
+  private metaData?: MetaDataType;
 
   constructor() {
     this.timestamp = new Date(Date.now()).toISOString();
@@ -11,6 +12,11 @@ export class SuccessReponseBuilder<DataType> {
 
   setData(data: DataType) {
     this.data = data;
+    return this;
+  }
+
+  setMetaData(metaData: MetaDataType) {
+    this.metaData = metaData;
     return this;
   }
 
@@ -32,7 +38,11 @@ export class SuccessReponseBuilder<DataType> {
     return this.timestamp;
   }
 
+  getMetaData() {
+    return this.metaData;
+  }
+
   build() {
-    return new SuccessResponse<DataType>(this);
+    return new SuccessResponse<DataType, MetaDataType>(this);
   }
 }

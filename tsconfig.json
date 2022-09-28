@@ -21,6 +21,7 @@
     "rootDirs": ["src", "test", "db/migrations"],
     "paths": {
       "@/infra/*": ["./src/infra/*"],
+      "@/common/*": ["./src/common/*"],
       "@/modules/*": ["./src/modules/*"],
       "@/test/*": ["../test/*"]
     }

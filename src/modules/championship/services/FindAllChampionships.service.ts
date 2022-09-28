@@ -5,6 +5,7 @@ import {
   IChampionshipRepository,
 } from '../domain/repositories/IChampionshipRepository';
 import { ChampionshipDatabaseRepository } from '../infra/repositories/ChampionshipDatabase.repository';
+import { IPagination } from '@/common/decorators/getPagination';
 
 @Injectable()
 export class FindAllChampionshipsService {
@@ -13,12 +14,17 @@ export class FindAllChampionshipsService {
     private championshipRepository: IChampionshipRepository,
   ) {}
 
-  async execute() {
-    const championships =
-      await this.championshipRepository.findAllChampionships();
+  async execute(pagination: IPagination) {
+    const { championships, total } =
+      await this.championshipRepository.findAllChampionships(pagination);
 
-    const response = new SuccessReponseBuilder<IChampionship[]>()
+    const metaData = {
+      ...pagination,
+      total,
+    };
+    const response = new SuccessReponseBuilder<IChampionship[], IPagination>()
       .setData(championships)
+      .setMetaData(metaData)
       .setStatusCode(HttpStatus.OK)
       .build();
 

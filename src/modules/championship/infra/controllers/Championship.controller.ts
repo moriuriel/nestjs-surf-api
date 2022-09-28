@@ -10,6 +10,10 @@ import {
 import { CreateChampionshipDto } from '../../dtos/CreateChampionship.dto';
 import { CreateChampionshipService } from '../../services/CreateChampionship.service';
 import { FindAllChampionshipsService } from '../../services';
+import {
+  GetPagination,
+  IPagination,
+} from 'src/common/decorators/getPagination';
 
 @Controller('/championships')
 export class ChampionshipController {
@@ -19,8 +23,13 @@ export class ChampionshipController {
   ) {}
 
   @Get()
-  async index(@Response() response: ExpressResponse): Promise<ExpressResponse> {
-    const championships = await this.findAllChampionshipsService.execute();
+  async index(
+    @GetPagination() pagination: IPagination,
+    @Response() response: ExpressResponse,
+  ): Promise<ExpressResponse> {
+    const championships = await this.findAllChampionshipsService.execute(
+      pagination,
+    );
 
     return response.status(HttpStatus.OK).json(championships);
   }

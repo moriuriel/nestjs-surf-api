@@ -15,7 +15,7 @@ export class FindAllBeachService {
   async execute() {
     const beachs = await this.beachRepository.findAll();
 
-    const response = new SuccessReponseBuilder<IBeach[]>()
+    const response = new SuccessReponseBuilder<IBeach[], null>()
       .setData(beachs)
       .setStatusCode(HttpStatus.OK)
       .build();
