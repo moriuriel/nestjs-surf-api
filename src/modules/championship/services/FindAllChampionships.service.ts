@@ -18,9 +18,10 @@ export class FindAllChampionshipsService {
     const { championships, total } =
       await this.championshipRepository.findAllChampionships(pagination);
 
-    const metaData = {
+    const metaData: IPagination = {
       ...pagination,
       total,
+      totalPages: Math.ceil(total / pagination.limit),
     };
     const response = new SuccessReponseBuilder<IChampionship[], IPagination>()
       .setData(championships)
