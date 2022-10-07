@@ -15,7 +15,7 @@ import {
   FindOneBeachService,
 } from '../../services';
 
-@Controller('/beachs')
+@Controller('/beaches')
 export class BeachController {
   constructor(
     private readonly createBeachService: CreateBeachService,

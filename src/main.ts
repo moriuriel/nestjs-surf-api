@@ -13,8 +13,6 @@ async function bootstrap() {
 
   app.useGlobalFilters(new HttpExceptionFilter());
 
-  await app.listen(port, () => {
-    console.log(`API is running in port ${port}`);
-  });
+  await app.listen(port);
 }
 bootstrap();
