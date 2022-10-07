@@ -8,13 +8,26 @@ import {
   Post,
   Response,
 } from '@nestjs/common';
-import { CreateBeachDto } from '../../dtos/CreateBeach.dto';
+import {
+  CreateBeachDto,
+  CreateBeachResponseDto,
+} from '../../dtos/CreateBeach.dto';
 import {
   FindAllBeachService,
   CreateBeachService,
   FindOneBeachService,
 } from '../../services';
+import {
+  ApiBadRequestResponse,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
+import { BeachesResponseDto, BeachResponseDto } from '../../dtos';
+import { ErrorDto } from '@/infra/response/error/error.dto';
 
+@ApiTags('Beaches')
+@ApiBadRequestResponse({ type: ErrorDto })
 @Controller('/beaches')
 export class BeachController {
   constructor(
@@ -23,6 +36,7 @@ export class BeachController {
     private readonly findOneBeachService: FindOneBeachService,
   ) {}
 
+  @ApiCreatedResponse({ type: CreateBeachResponseDto })
   @Post()
   async create(
     @Body() body: CreateBeachDto,
@@ -40,6 +54,7 @@ export class BeachController {
     return response.status(HttpStatus.CREATED).json(beach);
   }
 
+  @ApiOkResponse({ type: BeachesResponseDto })
   @Get()
   async index(@Response() response: ExpressResponse): Promise<ExpressResponse> {
     const beachs = await this.findAllBeachService.execute();
@@ -47,6 +62,7 @@ export class BeachController {
     return response.status(HttpStatus.OK).json(beachs);
   }
 
+  @ApiOkResponse({ type: BeachResponseDto })
   @Get(':beachId')
   async find(
     @Param('beachId') beachId: string,

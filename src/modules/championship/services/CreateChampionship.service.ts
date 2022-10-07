@@ -4,7 +4,7 @@ import {
   Injectable,
   UnprocessableEntityException,
 } from '@nestjs/common';
-import { SuccessReponseBuilder } from '@/infra/response';
+import { SuccessReponseBuilder } from '@/infra/response/success';
 import { Championship } from '../domain/entities/Championship';
 import {
   IChampionship,

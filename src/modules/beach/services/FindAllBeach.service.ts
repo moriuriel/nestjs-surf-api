@@ -1,5 +1,5 @@
 import { HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { SuccessReponseBuilder } from '@/infra/response';
+import { SuccessReponseBuilder } from '@/infra/response/success';
 import {
   IBeach,
   IBeachRepository,

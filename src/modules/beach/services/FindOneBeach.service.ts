@@ -1,5 +1,10 @@
-import { HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { SuccessReponseBuilder } from '@/infra/response';
+import {
+  HttpStatus,
+  Inject,
+  Injectable,
+  UnprocessableEntityException,
+} from '@nestjs/common';
+import { SuccessReponseBuilder } from '@/infra/response/success';
 import {
   IBeach,
   IBeachRepository,
@@ -15,6 +20,12 @@ export class FindOneBeachService {
 
   async execute(id: string) {
     const beach = await this.beachRepository.findById(id);
+
+    if (!beach) {
+      throw new UnprocessableEntityException(
+        'Praia não encontrada para ID informado',
+      );
+    }
 
     const response = new SuccessReponseBuilder<IBeach, null>()
       .setData(beach)
