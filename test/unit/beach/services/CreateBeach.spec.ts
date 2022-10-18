@@ -35,7 +35,7 @@ describe('Create Beach Service', () => {
   test('should be create beach with successfully', async () => {
     const { createBeachService } = await makeSut();
 
-    const beachEntity = new Beach('valid-beach', 'N', -28.3513, -48.8167);
+    const beachEntity = new Beach('valid-beach', 'N', -28.3513, -48.8167, 10);
 
     const beach = await createBeachService.execute(beachEntity);
 
@@ -49,7 +49,7 @@ describe('Create Beach Service', () => {
 
     const spyMethodFindByName = jest.spyOn(beachRepository, 'findByName');
 
-    const beachEntity = new Beach('valid-beach', 'N', -28.3513, -48.8167);
+    const beachEntity = new Beach('valid-beach', 'N', -28.3513, -48.8167, 10);
 
     await createBeachService.execute(beachEntity);
 
@@ -65,7 +65,7 @@ describe('Create Beach Service', () => {
   test('should be return exception for name duplicate', async () => {
     const { beachRepository, createBeachService } = await makeSut();
 
-    const beachEntity = new Beach('valid-beach', 'N', -28.3513, -48.8167);
+    const beachEntity = new Beach('valid-beach', 'N', -28.3513, -48.8167, 10);
 
     await beachRepository.create(beachEntity);
 

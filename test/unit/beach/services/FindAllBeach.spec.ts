@@ -37,11 +37,11 @@ describe('Find All Beach Service', () => {
   test('should be return beach list', async () => {
     const { beachRepository, findAllBeachService } = await makeSut();
 
-    const beachEntity = new Beach('valid-beach', 'N', -28.3513, -48.8167);
+    const beachEntity = new Beach('valid-beach', 'N', -28.3513, -48.8167, 10);
 
     await beachRepository.create(beachEntity);
 
-    const beachs = await findAllBeachService.execute();
+    const beachs = await findAllBeachService.execute({ limit: 0, page: 1 });
 
     expect(beachs).toHaveProperty('data');
 

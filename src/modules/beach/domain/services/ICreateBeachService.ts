@@ -3,6 +3,6 @@ export interface ICreateBeachServiceParams {
   lat: number;
   lng: number;
   position: string;
-  favorite: boolean;
+  favorite?: boolean;
   rating: number;
 }

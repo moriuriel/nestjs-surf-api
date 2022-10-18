@@ -5,6 +5,7 @@ import {
   IBeachRepository,
 } from '../domain/repositories/IBeachRepository';
 import { BeachDataBaseRepository } from '../infra/repositories/BeachDatabase.repository';
+import { IPagination } from '@/common/decorators/getPagination';
 
 @Injectable()
 export class FindAllBeachService {
@@ -12,11 +13,18 @@ export class FindAllBeachService {
     @Inject(BeachDataBaseRepository)
     private beachRepository: IBeachRepository,
   ) {}
-  async execute() {
-    const beachs = await this.beachRepository.findAll();
+  async execute(pagination: IPagination) {
+    const { beachs, total } = await this.beachRepository.findAll(pagination);
 
-    const response = new SuccessReponseBuilder<IBeach[], null>()
+    const metaData: IPagination = {
+      ...pagination,
+      total,
+      totalPages: Math.ceil(total / pagination.limit),
+    };
+
+    const response = new SuccessReponseBuilder<IBeach[], IPagination>()
       .setData(beachs)
+      .setMetaData(metaData)
       .setStatusCode(HttpStatus.OK)
       .build();
 

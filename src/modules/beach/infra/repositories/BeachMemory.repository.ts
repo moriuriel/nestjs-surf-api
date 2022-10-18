@@ -2,6 +2,7 @@ import { v4 } from 'uuid';
 import {
   IBeach,
   IBeachRepository,
+  IFindAllBeachReponse,
 } from '@/modules/beach/domain/repositories/IBeachRepository';
 import { Beach } from '../../domain/entities/Beach';
 
@@ -25,8 +26,8 @@ export class BeachMemoryRepository implements IBeachRepository {
     return newBeach;
   }
 
-  async findAll(): Promise<IBeach[]> {
-    return this.beachs;
+  async findAll(): Promise<IFindAllBeachReponse> {
+    return { beachs: this.beachs, total: 1 };
   }
 
   async findById(id: string): Promise<IBeach> {

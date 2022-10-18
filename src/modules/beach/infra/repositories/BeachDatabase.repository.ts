@@ -4,7 +4,9 @@ import { Beach } from '../../domain/entities/Beach';
 import {
   IBeach,
   IBeachRepository,
+  IFindAllBeachReponse,
 } from '../../domain/repositories/IBeachRepository';
+import { IPagination } from '@/common/decorators/getPagination';
 
 @Injectable()
 export class BeachDataBaseRepository implements IBeachRepository {
@@ -23,8 +25,18 @@ export class BeachDataBaseRepository implements IBeachRepository {
     });
   }
 
-  async findAll(): Promise<IBeach[]> {
-    return this.prismaService.beach.findMany();
+  async findAll(pagination: IPagination): Promise<IFindAllBeachReponse> {
+    const beachs = await this.prismaService.beach.findMany({
+      take: pagination.limit,
+      skip: (pagination.page - 1) * pagination.limit,
+    });
+
+    const total = await this.prismaService.beach.count();
+
+    return {
+      beachs,
+      total,
+    };
   }
 
   async findByName(name: string): Promise<IBeach> {

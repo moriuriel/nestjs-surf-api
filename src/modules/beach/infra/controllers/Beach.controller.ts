@@ -25,6 +25,7 @@ import {
 } from '@nestjs/swagger';
 import { BeachesResponseDto, BeachResponseDto } from '../../dtos';
 import { ErrorDto } from '@/infra/response/error/error.dto';
+import { GetPagination, IPagination } from '@/common/decorators/getPagination';
 
 @ApiTags('Beaches')
 @ApiBadRequestResponse({ type: ErrorDto })
@@ -58,8 +59,11 @@ export class BeachController {
 
   @ApiOkResponse({ type: BeachesResponseDto })
   @Get()
-  async index(@Response() response: ExpressResponse): Promise<ExpressResponse> {
-    const beachs = await this.findAllBeachService.execute();
+  async index(
+    @GetPagination() pagination: IPagination,
+    @Response() response: ExpressResponse,
+  ): Promise<ExpressResponse> {
+    const beachs = await this.findAllBeachService.execute(pagination);
 
     return response.status(HttpStatus.OK).json(beachs);
   }
