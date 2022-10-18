@@ -1,4 +1,10 @@
-import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+} from 'class-validator';
 import { GeoPosition } from '@/modules/beach/domain/enums/GeoPeosition.enum';
 import { ApiProperty } from '@nestjs/swagger';
 import { SuccessResponseDto } from '@/infra/response/success/SucessResponse.dto';
@@ -22,6 +28,14 @@ export class CreateBeachDto {
   @IsString()
   @IsEnum(GeoPosition)
   position: GeoPosition;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsBoolean()
+  favorite: boolean;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
+  rating: number;
 }
 
 export class CreateBeachResponseDto extends SuccessResponseDto {

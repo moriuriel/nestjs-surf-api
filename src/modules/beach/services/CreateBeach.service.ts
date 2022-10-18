@@ -19,8 +19,15 @@ export class CreateBeachService {
     @Inject(BeachDataBaseRepository)
     private beachRepository: IBeachRepository,
   ) {}
-  async execute({ lat, lng, name, position }: ICreateBeachServiceParams) {
-    const beach = new Beach(name, position, lat, lng);
+  async execute({
+    lat,
+    lng,
+    name,
+    position,
+    favorite,
+    rating,
+  }: ICreateBeachServiceParams) {
+    const beach = new Beach(name, position, lat, lng, rating, favorite);
 
     const nameIsAlreadyInUse = await this.beachRepository.findByName(
       beach.name,

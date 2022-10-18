@@ -17,6 +17,8 @@ export class BeachDataBaseRepository implements IBeachRepository {
         lat: beach.lat,
         lng: beach.lng,
         position: beach.position,
+        favorite: beach.favorite,
+        rating: beach.rating,
       },
     });
   }

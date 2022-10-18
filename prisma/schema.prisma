@@ -11,21 +11,12 @@ datasource db {
 }
 
 model beach {
-  id           String         @id @default(uuid())
-  name         String         @unique
-  position     String
-  lat          Float
-  lng          Float
-  championship championship[]
-  createdAt    DateTime       @default(now())
-}
-
-model championship {
-  id         String   @id @default(uuid())
-  name       String   @unique
-  status     String
-  event_date DateTime
-  beach      beach    @relation(fields: [beach_id], references: [id])
-  beach_id   String
-  createdAt  DateTime @default(now())
+  id        String   @id @default(uuid())
+  name      String   @unique
+  position  String
+  lat       Float
+  lng       Float
+  createdAt DateTime @default(now())
+  rating    Float    @default(0)
+  favorite  Boolean  @default(false)
 }

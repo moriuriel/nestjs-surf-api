@@ -14,6 +14,8 @@ export class BeachMemoryRepository implements IBeachRepository {
       beach.position,
       beach.lat,
       beach.lng,
+      beach.rating,
+      beach.favorite,
     );
 
     const newBeach = Object.assign({ id: v4() }, beachData);

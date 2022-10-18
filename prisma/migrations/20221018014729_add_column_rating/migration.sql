@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `beach` ADD COLUMN `rating` DOUBLE NOT NULL DEFAULT 0;

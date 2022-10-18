@@ -4,5 +4,7 @@ export class Beach {
     readonly position: string,
     readonly lat: number,
     readonly lng: number,
+    readonly rating: number,
+    readonly favorite?: boolean,
   ) {}
 }

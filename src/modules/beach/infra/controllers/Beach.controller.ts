@@ -42,13 +42,15 @@ export class BeachController {
     @Body() body: CreateBeachDto,
     @Response() response: ExpressResponse,
   ): Promise<ExpressResponse> {
-    const { name, position, lat, lng } = body;
+    const { name, position, lat, lng, favorite, rating } = body;
 
     const beach = await this.createBeachService.execute({
       name,
       position,
       lat,
       lng,
+      favorite,
+      rating,
     });
 
     return response.status(HttpStatus.CREATED).json(beach);
